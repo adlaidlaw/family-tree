@@ -1,0 +1,55 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+    background: #f7f7f7;
+    color: #111;
+  }
+
+main {
+    padding: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+h1 { font-size: 1.75rem; margin-bottom: 24px; text-align: center; }
+h2 { font-size: 1.25rem; margin: 32px 0 16px; }
+
+/* ========== Accessibility helpers ========== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible { outline: 3px solid #005fcc; outline-offset: 2px; }
+
+/* ========== Relationship visual language ========== */
+.relationship {
+  background: #ffffff;
+  border: 2px solid #ddd;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.relationship[data-type="marriage"] { border-style: solid; }
+.relationship[data-type="partnership"] { border-style: dashed; }
+.relationship[data-type="adoption"] { border-style: dotted; }
+
+.relationship-meta {
+  font-size: 0.875rem;
+  color: #444;
+  text-align: center;
+  margin-top: 8px;
+}
