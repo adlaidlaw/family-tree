@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Family Tree</title>
+
+  <style>
+    /* ========== Base / Reset ========== */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      background: #f7f7f7;
+      color: #111;
+    }
+
+    main {
+      padding: 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 { font-size: 1.75rem; margin-bottom: 24px; text-align: center; }
+    h2 { font-size: 1.25rem; margin: 32px 0 16px; }
+
+    /* ========== Accessibility helpers ========== */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    :focus-visible { outline: 3px solid #005fcc; outline-offset: 2px; }
+
+    /* ========== Relationship visual language ========== */
+    .relationship {
+      background: #ffffff;
+      border: 2px solid #ddd;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .relationship[data-type="marriage"] { border-style: solid; }
+    .relationship[data-type="partnership"] { border-style: dashed; }
+    .relationship[data-type="adoption"] { border-style: dotted; }
+
+    .relationship-meta {
+      font-size: 0.875rem;
+      color: #444;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* ========== Partners ========== */
+    .partners {
+      display: grid;
+      gap: 8px;
+      justify-items: center;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .connector {
+      font-size: 1.25rem;
+      color: #555;
+    }
+
+    /* ========== SVG connectors ========== */
+    .connector-svg {
+      width: 100%;
+      height: 24px;
+    }
+
+    .connector-svg line {
+      stroke: #999;
+      stroke-width: 2;
+    }
+
+    .connector-svg path {
+      stroke: #999;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    /* ========== Children ========== */
+    .children {
+      margin-top: 8px;
+      padding-left: 16px;
+    }
+
+    .children > li { list-style: disc; margin-bottom: 8px; }
+
+    /* ========== Person card ========== */
+    .person {
+      min-width: 160px;
+      padding: 12px;
+      border: 2px solid #666;
+      border-radius: 12px;
+      background: #fff;
+      text-align: center;
+    }
+
+    .person-name { font-weight: 600; }
+    .person-dates { font-size: 0.875rem; color: #444; }
+
+    /* ========== Progressive enhancement ========== */
+    @media (min-width: 600px) {
+      .partners {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .children {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        padding-left: 0;
+      }
+
+      .children > li { list-style: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Our Family Tree</h1>
+
+    <section aria-labelledby="generation-1">
+      <h2 id="generation-1">Generation 1</h2>
+
+      <article class="relationship" data-type="marriage" aria-labelledby="rel-1-label">
+        <h3 id="rel-1-label" class="sr-only">
+          Marriage between Nguyen Van A and Tran Thi B, from 1928 to 1940. One child.
+        </h3>
+
+        <div class="partners" role="group" aria-label="Partners">
+          <div class="person" tabindex="0" role="group" aria-labelledby="p1-name" aria-describedby="p1-dates">
+            <div id="p1-name" class="person-name">Nguyen Van A</div>
+            <div id="p1-dates" class="person-dates">1901 – 1972</div>
+          </div>
+
+          <div class="connector" aria-hidden="true">⚭</div>
+
+          <div class="person" tabindex="0" role="group" aria-labelledby="p2-name" aria-describedby="p2-dates">
+            <div id="p2-name" class="person-name">Tran Thi B</div>
+            <div id="p2-dates" class="person-dates">1905 – 1980</div>
+          </div>
+        </div>
+
+        <ul class="children" aria-label="Children">
+          <li>
+            <div class="person" tabindex="0" role="group" aria-labelledby="p3-name" aria-describedby="p3-dates">
+              <div id="p3-name" class="person-name">Nguyen Van C</div>
+              <div id="p3-dates" class="person-dates">1930 –</div>
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <article class="relationship" data-type="marriage" aria-labelledby="rel-2-label">
+        <h3 id="rel-2-label" class="sr-only">
+          Marriage between Nguyen Van A and Le Thi D, from 1942. One child.
+        </h3>
+
+        <div class="partners" role="group" aria-label="Partners">
+          <div class="person" tabindex="0" role="group" aria-labelledby="p1b-name" aria-describedby="p1b-dates">
+            <div id="p1b-name" class="person-name">Nguyen Van A</div>
+            <div id="p1b-dates" class="person-dates">1901 – 1972</div>
+          </div>
+
+          <div class="connector" aria-hidden="true">⚭</div>
+
+          <div class="person" tabindex="0" role="group" aria-labelledby="p4-name" aria-describedby="p4-dates">
+            <div id="p4-name" class="person-name">Le Thi D</div>
+            <div id="p4-dates" class="person-dates">1910 –</div>
+          </div>
+        </div>
+
+        <ul class="children" aria-label="Children">
+          <li>
+            <div class="person" tabindex="0" role="group" aria-labelledby="p5-name" aria-describedby="p5-dates">
+              <div id="p5-name" class="person-name">Nguyen Van E</div>
+              <div id="p5-dates" class="person-dates">1942 –</div>
+            </div>
+          </li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    /* ==============================
+       Data (replace later with JSON)
+       ============================== */
+
+    const data = {
+      people: {
+        p1: { id: "p1", name: "Nguyen Van A", birth: "1901", death: "1972" },
+        p2: { id: "p2", name: "Tran Thi B", birth: "1905", death: "1980" },
+        p3: { id: "p3", name: "Nguyen Van C", birth: "1930" },
+        p4: { id: "p4", name: "Le Thi D", birth: "1910" },
+        p5: { id: "p5", name: "Nguyen Van E", birth: "1942" }
+      },
+      relationships: [
+        {
+          id: "r1",
+          type: "marriage",
+          partners: ["p1", "p2"],
+          start: "1928",
+          end: "1940",
+          children: ["p3"]
+        },
+        {
+          id: "r2",
+          type: "marriage",
+          partners: ["p1", "p4"],
+          start: "1942",
+          children: ["p5"]
+        }
+      ]
+    };
+
+    /* ==============================
+       Rendering helpers
+       ============================== */
+
+    function createPerson(person) {
+      const el = document.createElement("div");
+      el.className = "person";
+      el.tabIndex = 0;
+      el.setAttribute("role", "group");
+      el.setAttribute(
+        "aria-label",
+        `${person.name}, born ${person.birth || "unknown"}${person.death ? ", died " + person.death : ""}`
+      );
+
+      const name = document.createElement("div");
+      name.className = "person-name";
+      name.textContent = person.name;
+
+      const dates = document.createElement("div");
+      dates.className = "person-dates";
+      dates.textContent = `${person.birth || ""} – ${person.death || ""}`;
+
+      el.appendChild(name);
+      el.appendChild(dates);
+      return el;
+    }
+
+    function relationshipLabel(rel, people) {
+      const [a, b] = rel.partners.map(id => people[id].name);
+      const dates = rel.start
+        ? `, from ${rel.start}${rel.end ? " to " + rel.end : ""}`
+        : "";
+      return `${capitalize(rel.type)} between ${a} and ${b}${dates}. ${rel.children.length} child${rel.children.length !== 1 ? "ren" : ""}.`;
+    }
+
+    function capitalize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    function renderRelationship(rel, people) {
+      const article = document.createElement("article");
+      article.className = "relationship";
+      article.dataset.type = rel.type;
+
+      const srLabel = document.createElement("h3");
+      srLabel.className = "sr-only";
+      srLabel.textContent = relationshipLabel(rel, people);
+      article.appendChild(srLabel);
+
+      const partners = document.createElement("div");
+      partners.className = "partners";
+      partners.setAttribute("role", "group");
+      partners.setAttribute("aria-label", "Partners");
+
+      partners.appendChild(createPerson(people[rel.partners[0]]));
+
+      const connector = document.createElement("div");
+      connector.className = "connector";
+      connector.setAttribute("aria-hidden", "true");
+      connector.textContent = rel.type === "marriage" ? "⚭" : "⊙";
+      partners.appendChild(connector);
+
+      partners.appendChild(createPerson(people[rel.partners[1]]));
+
+      article.appendChild(partners);
+
+      if (rel.start) {
+        const meta = document.createElement("div");
+        meta.className = "relationship-meta";
+        meta.textContent = `${capitalize(rel.type)} ${rel.start}${rel.end ? "–" + rel.end : ""}`;
+        article.appendChild(meta);
+      }
+
+      if (rel.children?.length) {
+        const list = document.createElement("ul");
+        list.className = "children";
+        list.setAttribute("aria-label", "Children");
+
+        rel.children.forEach(cid => {
+          const li = document.createElement("li");
+          li.appendChild(createPerson(people[cid]));
+          list.appendChild(li);
+        });
+
+        article.appendChild(list);
+      }
+
+      return article;
+    }
+
+    /* ==============================
+       Layout modes
+       ============================== */
+
+    function applyLayoutMode() {
+      const root = document.documentElement;
+      const isDesktop = window.matchMedia("(min-width: 64rem)").matches;
+      root.dataset.layout = isDesktop ? "diagram" : "linear";
+    }
+
+    window.addEventListener("resize", applyLayoutMode);
+    applyLayoutMode();
+
+    /* ==============================
+       App bootstrap
+       ============================== */
+
+    (function init() {
+      const main = document.querySelector("main");
+      const section = document.createElement("section");
+      section.setAttribute("aria-labelledby", "generation-1");
+
+      const h2 = document.createElement("h2");
+      h2.id = "generation-1";
+      h2.textContent = "Generation 1";
+      section.appendChild(h2);
+
+      data.relationships.forEach(rel => {
+        section.appendChild(renderRelationship(rel, data.people));
+      });
+
+      main.appendChild(section);
+    })();
+  </script>
+</body>
+</html>
